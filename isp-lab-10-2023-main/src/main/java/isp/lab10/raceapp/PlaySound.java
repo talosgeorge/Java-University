@@ -1,0 +1,58 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package isp.lab10.raceapp;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+
+/**
+ *
+ * @author mihai
+ */
+public class PlaySound {
+
+    private Clip clip;
+
+    void playSound() {
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File(".\\shanghai-formula-1-grand-prix.wav")));
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void stopSound(){
+        if(clip!=null)
+            clip.stop();
+    }
+//    public static class PlaySoundThread extends Thread {
+//        private volatile boolean running = true;
+//        public void stopSound(){
+//            running = false;
+//        }
+//        public void run(){
+//            while (running){
+//                clip = AudioSystem.getClip();
+//                clip.open(AudioSystem.getAudioInputStream(new File(".\\shanghai-formula-1-grand-prix.wav")));
+//                clip.start();
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
+
+    public static void main(String[] args) throws InterruptedException {
+        PlaySound ps = new PlaySound();
+        ps.playSound();
+        Thread.sleep(15000);
+        ps.stopSound();
+    }
+}
